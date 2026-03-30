@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kath T. | Content Strategist & Visual Storyteller</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mystic-beige': '#F5F2EA',
+                        'mystic-stone': '#E6E2D6',
+                        'mystic-charcoal': '#2C2C2C',
+                        'mystic-gold': '#D4AF37',
+                        'mystic-accent': '#8B8570',
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Inter"', 'sans-serif'],
+                        'sc': ['"Noto Serif SC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F5F2EA;
+            color: #2C2C2C;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F2EA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8B8570;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-mystic-gold selection:text-white">
+ 
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-mystic-beige/90 backdrop-blur-sm z-50 border-b border-mystic-stone">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-serif text-2xl font-semibold tracking-widest text-mystic-charcoal">K.T</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="scrollToSection('hero')" class="text-mystic-charcoal hover:text-mystic-gold transition-colors font-medium">Home</button>
+                    <button onclick="scrollToSection('about')" class="text-mystic-charcoal hover:text-mystic-gold transition-colors font-medium">About</button>
+                    <button onclick="scrollToSection('cases')" class="text-mystic-charcoal hover:text-mystic-gold transition-colors font-medium">Case Studies</button>
+                    <button onclick="scrollToSection('testimonials')" class="text-mystic-charcoal hover:text-mystic-gold transition-colors font-medium">Testimonials</button>
+                    <button onclick="scrollToSection('contact')" class="text-mystic-charcoal hover:text-mystic-gold transition-colors font-medium">Contact</button>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-mystic-charcoal hover:text-mystic-gold focus:outline-none">
+                        <span class="text-2xl">☰</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-mystic-beige border-t border-mystic-stone">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <button onclick="scrollToSection('hero'); toggleMobileMenu()" class="block w-full px-3 py-2 text-base font-medium text-mystic-charcoal hover:text-mystic-gold hover:bg-mystic-stone/30 rounded-md">Home</button>
+                <button onclick="scrollToSection('about'); toggleMobileMenu()" class="block w-full px-3 py-2 text-base font-medium text-mystic-charcoal hover:text-mystic-gold hover:bg-mystic-stone/30 rounded-md">About</button>
+                <button onclick="scrollToSection('cases'); toggleMobileMenu()" class="block w-full px-3 py-2 text-base font-medium text-mystic-charcoal hover:text-mystic-gold hover:bg-mystic-stone/30 rounded-md">Case Studies</button>
+                <button onclick="scrollToSection('testimonials'); toggleMobileMenu()" class="block w-full px-3 py-2 text-base font-medium text-mystic-charcoal hover:text-mystic-gold hover:bg-mystic-stone/30 rounded-md">Testimonials</button>
+                <button onclick="scrollToSection('contact'); toggleMobileMenu()" class="block w-full px-3 py-2 text-base font-medium text-mystic-charcoal hover:text-mystic-gold hover:bg-mystic-stone/30 rounded-md">Contact</button>
+            </div>
+        </div>
+    </nav>
+ 
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+            <!-- Decorative minimal shapes using CSS borders/radius -->
+            <div class="absolute top-20 right-20 w-64 h-64 rounded-full border border-mystic-charcoal"></div>
+            <div class="absolute bottom-40 left-10 w-96 h-96 rounded-full border border-mystic-gold"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="text-left fade-in">
+                <p class="text-mystic-accent uppercase tracking-[0.3em] text-sm mb-4 font-semibold">Portfolio 2026</p>
+                <h1 class="font-serif text-5xl md:text-7xl text-mystic-charcoal leading-tight mb-6">
+                    Kath T.
+                </h1>
+                <h2 class="font-serif italic text-3xl md:text-4xl text-mystic-gold mb-8">
+                    Content Strategist & <br> Visual Storyteller
+                </h2>
+                <div class="w-24 h-1 bg-mystic-charcoal mb-8"></div>
+                <p class="text-lg text-gray-600 mb-10 max-w-md leading-relaxed font-light">
+                    Bridging <span class="font-medium text-mystic-charcoal">Data & Intuition</span>. <br>
+                    Crafting visuals that heal and narratives that convert.
+                </p>
+                <div class="flex space-x-4">
+                    <button onclick="scrollToSection('cases')" class="bg-mystic-charcoal text-white px-8 py-3 rounded-none hover:bg-mystic-gold transition-colors duration-300 uppercase tracking-wider text-sm">View Work</button>
+                    <button onclick="scrollToSection('contact')" class="border border-mystic-charcoal text-mystic-charcoal px-8 py-3 rounded-none hover:bg-mystic-charcoal hover:text-white transition-colors duration-300 uppercase tracking-wider text-sm">Contact Me</button>
+                </div>
+            </div>
+            
+            <!-- HERO IMAGE SECTION - 保留原有装饰性背景和用语，并嵌入个人图片作为背景 -->
+            <div class="hidden lg:block relative h-[600px] w-full slide-in-right overflow-hidden">
+                <!-- 个人图片作为背景 -->
+                <div class="absolute inset-0">
+                    <img src="IMG_20260107_114931.jpg" alt="Kath T. - Content Strategist & Visual Storyteller" 
+                         class="w-full h-full object-cover object-center opacity-70">
+                </div>
+                <!-- 保留原有的装饰性背景 -->
+                <div class="absolute inset-0 bg-mystic-stone/30"></div>
+                <!-- 保留原有的装饰性用语 -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center p-8 relative z-10">
+                        <div class="text-6xl text-mystic-accent/80 mb-4">✦</div>
+                        <p class="font-serif text-2xl text-mystic-charcoal italic drop-shadow-sm">"I don't just create content;<br>I craft atmospheres."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl text-mystic-charcoal mb-4">About Kath</h2>
+                <div class="w-16 h-0.5 bg-mystic-gold mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                <div class="prose prose-lg text-gray-600 font-light">
+                    <p class="mb-6">
+                        As a <span class="font-semibold text-mystic-charcoal">Creative Strategist</span> with 4 years of experience in the global market, I specialize in decoding the "Algorithm of Emotion."
+                    </p>
+                    <p class="mb-6">
+                        My superpower lies in blending <span class="font-semibold text-mystic-charcoal">INFJ Empathy</span> with <span class="font-semibold text-mystic-charcoal">Data-Driven Logic</span>. I have successfully led cross-cultural visual projects and managed localized content strategies that resonate with the Western audience's subconscious needs.
+                    </p>
+                    <blockquote class="border-l-4 border-mystic-gold pl-4 italic text-mystic-charcoal my-8 font-serif text-xl">
+                        "Mercury in Pisces intuition, meets Marketing logic."
+                    </blockquote>
+                </div>
+                
+                <div class="bg-mystic-beige p-8 shadow-sm">
+                    <h3 class="font-serif text-2xl mb-6 text-mystic-charcoal">Core Competencies</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-mystic-gold mr-3 mt-1">✦</span>
+                            <div>
+                                <strong class="block text-mystic-charcoal">Visual Direction</strong>
+                                <span class="text-sm text-gray-600">Orchestrating aesthetics that speak louder than words.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-mystic-gold mr-3 mt-1">✦</span>
+                            <div>
+                                <strong class="block text-mystic-charcoal">Storytelling</strong>
+                                <span class="text-sm text-gray-600">Scripting narratives that trigger emotional "Hooks."</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-mystic-gold mr-3 mt-1">✦</span>
+                            <div>
+                                <strong class="block text-mystic-charcoal">Growth Strategy</strong>
+                                <span class="text-sm text-gray-600">Using A/B testing to find the "Destined" audience.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Case Studies Section -->
+    <section id="cases" class="py-24 bg-mystic-beige">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-4xl text-mystic-charcoal mb-4">Strategic Works</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Selected projects demonstrating the fusion of aesthetics, data, and empathy.</p>
+            </div>
+ 
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap justify-center mb-12 gap-4">
+                <button onclick="switchTab('case1')" id="tab-case1" class="px-6 py-2 border-b-2 border-mystic-charcoal text-mystic-charcoal font-medium transition-all">01. Visual Alchemy</button>
+                <button onclick="switchTab('case2')" id="tab-case2" class="px-6 py-2 border-b-2 border-transparent text-gray-500 hover:text-mystic-charcoal font-medium transition-all">02. Logic of Magic</button>
+                <button onclick="switchTab('case3')" id="tab-case3" class="px-6 py-2 border-b-2 border-transparent text-gray-500 hover:text-mystic-charcoal font-medium transition-all">03. Empathy Connection</button>
+            </div>
+ 
+            <!-- Case Content Container -->
+            <div class="bg-white p-8 md:p-12 shadow-sm min-h-[600px] transition-all duration-500">
+                <!-- CASE 1: Visual Alchemy -->
+                <div id="case1" class="case-content grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-xs font-bold tracking-widest text-mystic-gold uppercase mb-2 block">Production & Direction</span>
+                        <h3 class="font-serif text-3xl text-mystic-charcoal mb-6">Visual Alchemy: Cross-Cultural Production</h3>
+                        <div class="space-y-6 text-gray-600">
+                            <div>
+                                <h4 class="font-bold text-mystic-charcoal text-sm uppercase mb-2">The Challenge</h4>
+                                <p class="text-sm">Transforming a functional product into an emotional necessity for the North American market. The brand lacked "Soul" and "Local Vibe."</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-mystic-charcoal text-sm uppercase mb-2">The Solution</h4>
+                                <ul class="list-disc list-inside text-sm space-y-1 pl-2">
+                                    <li>Led <strong>6 independent overseas shooting projects</strong>.</li>
+                                    <li>Managed lifecycle from <em>Concept Board</em> to <em>Post-Production</em>.</li>
+                                    <li>Curated local talents to align with "Lifestyle" trends.</li>
+                                </ul>
+                                <div class="mt-6 p-4 bg-grey-50 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <svg class="w-5 h-5 text-mystic-gold mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <span class="text-sm font-medium text-mystic-charcoal">Production Highlights</span>
+                                    </div>
+                                    <div class="aspect-video w-full bg-black rounded overflow-hidden">
+                                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/r8lLw24eGWY?start=5&end=20&autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                                
+                                <!-- 第二个视频 -->
+                                <div class="mt-4 p-4 bg-grey-50 rounded-lg">
+                                    <div class="flex items-center mb-3">
+                                        <svg class="w-5 h-5 text-mystic-gold mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <span class="text-sm font-medium text-mystic-charcoal">Production Highlights</span>
+                                    </div>
+                                    <div class="aspect-video w-full bg-black rounded overflow-hidden">
+                                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/A2eC_VM2VTE?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-4 border-t border-gray-100">
+                                <p class="italic text-mystic-accent text-sm">"This project proves my ability to control visual tone—crucial for building trust in spiritual & wellness brands."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center bg-mystic-beige/30 p-6 rounded-sm">
+                        <div class="chart-container" style="height: 200px; max-height: 250px;"><canvas id="chartCase1"></canvas></div>
+                        <p class="text-center text-xs text-gray-500 mt-4">Impact on key performance metrics post-visual upgrade</p>
+                    </div>
+                </div>
+                
+                <!-- CASE 2: Logic of Magic -->
+                <div id="case2" class="case-content hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-xs font-bold tracking-widest text-mystic-gold uppercase mb-2 block">GTM Strategy & Data</span>
+                        <h3 class="font-serif text-3xl text-mystic-charcoal mb-6">The Logic of Magic: Data-Driven Storytelling</h3>
+                        <div class="space-y-6 text-gray-600">
+                            <div>
+                                <h4 class="font-bold text-mystic-charcoal text-sm uppercase mb-2">The Challenge</h4>
+                                <p class="text-sm">Launch of Product 2.0 in a saturated market. How to make a "boring" product go viral?</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-mystic-charcoal text-sm uppercase mb-2">The Solution</h4>
+                                <ul class="list-disc list-inside text-sm space-y-1 pl-2">
+                                    <li><strong>Script Engineering:</strong> Deconstructed viral videos into modular elements.</li>
+                                    <li><strong>A/B Testing:</strong> Tested 3 narrative arcs to find the "Golden 3 Seconds."</li>
+                                </ul>
+                            </div>
+                            <div class="pt-4 border-t border-gray-100">
+                                <p class="italic text-mystic-accent text-sm">"I don't guess; I test. I use data to validate intuition."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center justify-center bg-mystic-beige/30 p-6 rounded-sm">
+                        <div class="chart-container"><canvas id="chartCase2"></canvas></div>
+                        <p class="text-center text-xs text-gray-500 mt-4">Optimization Results: Cost vs. Conversion</p>
+                    </div>
+                </div>
+                
+                <!-- CASE 3: Empathy Connection -->
+                <div id="case3" class="case-content hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <!-- 左侧内容保持不变 -->
+                    <div>
+                        <span class="text-xs font-bold tracking-widest text-mystic-gold uppercase mb-2 block">Social Media & Community</span>
+                        <h3 class="font-serif text-3xl text-mystic-charcoal mb-6">The Empathy Connection: First-Person Narrative</h3>
+                        <div class="space-y-6 text-gray-600">
+                            <div>
+                                <h4 class="font-bold text-mystic-charcoal text-sm uppercase mb-2">The Concept</h4>
+                                <p class="text-sm">0-1 Incubation of a Niche Lifestyle Account. Focusing on <strong>"Healing"</strong> rather than selling.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-mystic-charcoal text-sm uppercase mb-2">The Strategy</h4>
+                                <ul class="list-disc list-inside text-sm space-y-1 pl-2">
+                                    <li><strong>First-Person POV:</strong> Adopted a narrative voice that feels intimate.</li>
+                                    <li><strong>Emotional Hooks:</strong> Content centered around shared vulnerabilities.</li>
+                                </ul>
+                            </div>
+                            <div class="pt-4 border-t border-gray-100">
+                                <p class="italic text-mystic-accent text-sm">"Key Insight: In the realm of emotional content, vulnerability is the strongest currency."</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 小红书案例部分 -->
+                    <div class="flex flex-col items-center justify-center bg-mystic-beige/30 p-6 rounded-sm">
+                        <div class="w-full">
+                            <div class="flex items-center mb-6">
+                                <svg class="w-5 h-5 text-mystic-gold mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-lg font-medium text-mystic-charcoal font-serif">Recent Red Note Highlight</span>
+                            </div>
+                            
+                            <!-- 数据截图和视频容器 -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                                <!-- 左侧数据截图 -->
+                                <div class="bg-white p-3 rounded shadow-sm border border-mystic-stone">
+                                    <div class="aspect-[9/16] overflow-hidden rounded">
+                                        <!-- 数据截图 -->
+                                        <img src="MEITU_20260107_143330433.jpg" alt="小红书数据截图" class="w-full h-full object-contain bg-gray-100">
+                                    </div>
+                                </div>
+                                
+                                <!-- 右侧本地视频 -->
+                                <div class="bg-black p-3 rounded shadow-sm border border-mystic-stone">
+                                    <div class="aspect-[9/16] overflow-hidden rounded">
+                                        <!-- 视频 -->
+                                        <video class="w-full h-full object-contain" controls>
+                                            <source src="red_note_video.mp4" type="video/mp4">
+                                            您的浏览器不支持视频标签。
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Why it works部分 -->
+                            <div class="bg-white p-6 rounded border border-mystic-stone shadow-sm">
+                                <h4 class="font-serif text-xl text-mystic-charcoal mb-4 pb-2 border-b border-mystic-stone">Why it works:</h4>
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <span class="text-mystic-gold mr-2 mt-1">✦</span>
+                                        <div>
+                                            <strong class="block text-mystic-charcoal text-sm mb-1">Reverse Chronology Storytelling</strong>
+                                            <p class="text-xs text-gray-600">Employing a reverse narrative structure to reveal a woman's growth journey—from losing her childhood rabbit to raising an ideal pet as an adult—creates emotional depth and viewer engagement through suspense and reflection.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="text-mystic-gold mr-2 mt-1">✦</span>
+                                        <div>
+                                            <strong class="block text-mystic-charcoal text-sm mb-1">Cultural Resonance & Family Dynamics</strong>
+                                            <p class="text-xs text-gray-600">Tapping into the nuanced theme of "healing the inner child" within East Asian family education, the content sparks collective introspection and emotional catharsis, fostering a strong sense of shared experience among viewers.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="text-mystic-gold mr-2 mt-1">✦</span>
+                                        <div>
+                                            <strong class="block text-mystic-charcoal text-sm mb-1">OST-Driven Emotional Pacing</strong>
+                                            <p class="text-xs text-gray-600">Strategic use of popular TV drama soundtracks as background music amplifies narrative rhythm, guides emotional peaks and valleys, and enhances the nostalgic yet uplifting atmosphere, making the story more immersive and memorable.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 pt-4 border-t border-mystic-stone/30">
+                                    <p class="text-xs text-mystic-accent italic">"By deconstructing emotional algorithms, the content transforms data insights into healing narratives, achieving both viewership growth and audience loyalty."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Moodboard/Aesthetic Section -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+             <h2 class="font-serif text-3xl text-mystic-charcoal mb-12">Aesthetic Direction</h2>
+             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-96">
+                 <div class="bg-mystic-stone h-full flex items-center justify-center text-gray-400 font-serif italic text-xl">Minimalist</div>
+                 <div class="bg-mystic-gold/30 h-full flex items-center justify-center text-gray-500 font-serif italic text-xl">Mystic</div>
+                 <div class="bg-mystic-charcoal h-full flex items-center justify-center text-gray-600 font-serif italic text-xl">Healing</div>
+                 <div class="bg-mystic-beige h-full flex items-center justify-center text-gray-400 font-serif italic text-xl">Atmosphere</div>
+             </div>
+             <p class="mt-8 text-mystic-accent font-serif italic text-2xl">"Quiet Luxury meets Spiritual Depth"</p>
+        </div>
+    </section>
+
+    <!-- NEW Testimonials Section -->
+    <section id="testimonials" class="py-24 bg-white relative border-t border-mystic-stone">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl text-mystic-charcoal mb-4">Testimonials</h2>
+                <div class="w-16 h-0.5 bg-mystic-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Testimonial 1: Lara H -->
+                <div class="bg-mystic-beige p-10 relative shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-mystic-gold text-6xl absolute top-4 left-6 font-serif opacity-30 leading-none">"</div>
+                    <p class="text-gray-600 italic leading-relaxed mb-6 relative z-10 pt-8">
+                        "I've had the pleasure of working with Kathie and have been consistently impressed by her exceptional communication skills and efficient work style. She always manages to communicate complex ideas to her partners in a clear and concise manner, consistently adhering to her own logical approach and ensuring the efficient completion of tasks."
+                    </p>
+                    <div class="flex items-center mt-4">
+                        <div class="w-10 h-[1px] bg-mystic-charcoal mr-4"></div>
+                        <h4 class="font-serif text-xl text-mystic-charcoal font-semibold">Lara. H</h4>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2: Sylvia X -->
+                <div class="bg-mystic-beige p-10 relative shadow-sm hover:shadow-md transition-shadow">
+                    <div class="text-mystic-gold text-6xl absolute top-4 left-6 font-serif opacity-30 leading-none">"</div>
+                    <p class="text-gray-600 italic leading-relaxed mb-6 relative z-10 pt-8">
+                        "Kathie is the creative genius behind our brand, crafting innovative marketing strategies that keep us ahead of the curve. Her deep understanding of digital trends and expertise in influencer marketing have been crucial to our customer retention. I truly value her contributions and enjoy working with her immensely."
+                    </p>
+                    <div class="flex items-center mt-4">
+                        <div class="w-10 h-[1px] bg-mystic-charcoal mr-4"></div>
+                        <h4 class="font-serif text-xl text-mystic-charcoal font-semibold">Sylvia. X</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-mystic-beige border-t border-mystic-stone">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-serif text-5xl text-mystic-charcoal mb-8">Let's Manifest Success Together.</h2>
+            <p class="text-gray-600 mb-12">Ready to align your brand's vision with data-driven strategy?</p>
+            
+            <div class="bg-white p-12 shadow-sm border border-mystic-stone">
+                <div class="space-y-6">
+                    <div class="flex flex-col items-center">
+                        <span class="text-mystic-gold text-2xl mb-2">✉</span>
+                        <a href="mailto:ka.dodobiz@gmail.com" class="text-xl text-mystic-charcoal hover:text-mystic-gold transition-colors font-serif">ka.dodobiz@gmail.com</a>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-mystic-gold text-2xl mb-2"></span>
+                        <p class="text-xl text-mystic-charcoal font-serif">+86 191 2873 2101</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-mystic-gold text-2xl mb-2"></span>
+                    </div>
+                </div>
+                <div class="mt-10 pt-10 border-t border-gray-100">
+                    <button class="bg-mystic-charcoal text-white px-10 py-4 text-sm tracking-widest uppercase hover:bg-mystic-gold transition-colors duration-300 w-full md:w-auto">Download Full Resume</button>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Footer -->
+    <footer class="bg-mystic-charcoal text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-mystic-stone/50 text-sm font-light">© 2026 Kath T.. Crafted with Intuition & Logic.</p>
+        </div>
+    </footer>
+ 
+    <!-- Scripts -->
+    <script>
+        // --- Navigation Logic ---
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+ 
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+ 
+        // --- Tabs Logic ---
+        function switchTab(caseId) {
+            // Hide all content
+            document.querySelectorAll('.case-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Remove active styles from tabs
+            document.querySelectorAll('[id^="tab-case"]').forEach(el => {
+                el.classList.remove('border-mystic-charcoal', 'text-mystic-charcoal');
+                el.classList.add('border-transparent', 'text-gray-500');
+            });
+ 
+            // Show selected content
+            document.getElementById(caseId).classList.remove('hidden');
+            
+            // Add active styles to selected tab
+            const activeTab = document.getElementById('tab-' + caseId);
+            activeTab.classList.remove('border-transparent', 'text-gray-500');
+            activeTab.classList.add('border-mystic-charcoal', 'text-mystic-charcoal');
+        }
+ 
+        // --- Chart.js Configurations ---
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Chart 1: Visual Alchemy (Bar Chart - Uplift)
+            const ctx1 = document.getElementById('chartCase1').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Ad CTR', 'GMV Boost'],
+                    datasets: [{
+                        label: 'Performance Uplift (%)',
+                        data: [25, 35],
+                        backgroundColor: ['#D4AF37', '#2C2C2C'],
+                        borderWidth: 0,
+                        barThickness: 60
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Visual Upgrade Impact', font: { family: 'Playfair Display', size: 16 } }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { display: false } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+ 
+            // Chart 2: Logic of Magic (Doughnut/Bar - Optimization)
+            const ctx2 = document.getElementById('chartCase2').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar', // Using Bar for clearer comparison of before/after or impact
+                data: {
+                    labels: ['CPM Reduction', 'Conversion Rate'],
+                    datasets: [{
+                        label: 'Improvement (%)',
+                        data: [30, 20],
+                        backgroundColor: ['#8B8570', '#E6E2D6'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', // Horizontal bar for variety
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'A/B Testing Efficiency', font: { family: 'Playfair Display', size: 16 } }
+                    },
+                    scales: {
+                        x: { beginAtZero: true, grid: { display: false } },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
